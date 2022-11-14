@@ -55,10 +55,6 @@ Input Vector 2 from Global Memory --->|             |      |__|
 #include <stdint.h>
 #include <hls_stream.h>
 
-#define DATA_SIZE 4096
-
-const int c_size = DATA_SIZE;
-
 static void load_input(uint32_t* in, hls::stream<uint32_t>& inStream, int size) {
     for (int i = 0; i < size; i++) {
         inStream << in[i];
