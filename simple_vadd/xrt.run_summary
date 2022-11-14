@@ -1,0 +1,31 @@
+{
+    "schema_version": {
+        "major": "1",
+        "minor": "2",
+        "patch": "0"
+    },
+    "generation": {
+        "this_file": "\/home\/procaccini\/Vitis_Accel_Examples\/cpp_kernels\/simple_vadd\/xrt.run_summary",
+        "source": "vp",
+        "PID": "2694032",
+        "timestamp": "1668158577652"
+    },
+    "files": [
+        {
+            "name": "hal_host_trace.csv",
+            "type": "VP_TRACE"
+        },
+        {
+            "name": "sc_host_summary.csv",
+            "type": "PROFILE_SUMMARY"
+        },
+        {
+            "name": "sc_trace.csv",
+            "type": "VP_TRACE"
+        },
+        {
+            "name": "summary.csv",
+            "type": "PROFILE_SUMMARY"
+        }
+    ]
+}
