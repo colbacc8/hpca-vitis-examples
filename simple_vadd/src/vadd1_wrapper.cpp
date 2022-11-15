@@ -14,7 +14,13 @@
 * under the License.
 */
 
-#include "vadd1_kernel.h"
+//#pragma once
+#define CL_HPP_CL_1_2_DEFAULT_BUILD
+#define CL_HPP_TARGET_OPENCL_VERSION 120
+#define CL_HPP_MINIMUM_OPENCL_VERSION 120
+#define CL_HPP_ENABLE_PROGRAM_CONSTRUCTION_FROM_ARRAY_COMPATIBILITY 1
+
+#include <CL/cl2.hpp>
 #include <fstream>
 #include <iostream>
 #include <stdlib.h>
@@ -82,11 +88,10 @@ int main(int argc, char* argv[]) {
     cl::Program::Binaries bins;
     bins.push_back({buf, nb});
     bool valid_device = false;
+    cl::Device device;
     for (unsigned int i = 0; i < devices.size(); i++) {
-        auto device = devices[i];
-        // Creating Context and Command Queue for selected Device
+        device = devices[i];
         context = cl::Context(device, nullptr, nullptr, nullptr, &err);
-        q = cl::CommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &err);
         std::cout << "Trying to program device[" << i << "]: " << device.getInfo<CL_DEVICE_NAME>() << std::endl;
         cl::Program program(context, {device}, bins, nullptr, &err);
         if (err != CL_SUCCESS) {
@@ -102,6 +107,8 @@ int main(int argc, char* argv[]) {
         std::cout << "Failed to program any device found, exit!\n";
         exit(EXIT_FAILURE);
     }
+        // Creating Context and Command Queue for selected Device
+        q = cl::CommandQueue(context, device, CL_QUEUE_PROFILING_ENABLE, &err);
 
     // These commands will allocate memory on the Device. The cl::Buffer objects can
     // be used to reference the memory locations on the device.
@@ -142,7 +149,7 @@ int main(int argc, char* argv[]) {
     // source_results vector
     q.enqueueMigrateMemObjects({buffer_result}, CL_MIGRATE_MEM_OBJECT_HOST);
 
-   q.finish();
+    q.finish();
 
     // Verify the result
     int match = 0;
@@ -154,12 +161,11 @@ int main(int argc, char* argv[]) {
             break;
         }
     }
+    std::cout << "TEST " << (match ? "FAILED" : "PASSED") << std::endl;
+    return (match ? EXIT_FAILURE : EXIT_SUCCESS);
 
     q.enqueueUnmapMemObject(buffer_a, ptr_a);
     q.enqueueUnmapMemObject(buffer_b, ptr_b);
     q.enqueueUnmapMemObject(buffer_result, ptr_result);
     q.finish();
-
-    std::cout << "TEST " << (match ? "FAILED" : "PASSED") << std::endl;
-    return (match ? EXIT_FAILURE : EXIT_SUCCESS);
 }
