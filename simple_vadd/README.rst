@@ -34,9 +34,8 @@ Application code is located in the src directory. Accelerator binary files will 
 
 ::
 
-   src/krnl_vadd.cpp
-   src/vadd.cpp
-   src/vadd.h
+   src/vadd1_kernel.cpp
+   src/vadd1_wrapper.cpp
    
 COMMAND LINE ARGUMENTS
 ----------------------
@@ -45,7 +44,7 @@ Once the environment has been configured, the application can be executed by
 
 ::
 
-   ./simple_vadd <krnl_vadd XCLBIN>
+   ./vadd1_wrapper <vadd1_kernel XCLBIN>
 
 DETAILS
 -------
