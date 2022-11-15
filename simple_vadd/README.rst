@@ -55,7 +55,7 @@ Once the environment has been configured, the application can be compiled by
    
 Once the compilation has been completed, the application can be executed by
 ::
-   ./vadd1_wrapper <vadd1_kernel XCLBIN>
+   XCL_EMULATION_MODE=hw_emu ./vadd1_wrapper ./build_dir.hw_emu.xilinx_u280_xdma_201920_3/vadd1_kernel.xclbin
 
 DETAILS
 -------
