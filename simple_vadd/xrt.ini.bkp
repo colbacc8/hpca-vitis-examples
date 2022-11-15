@@ -1,6 +1,0 @@
-[Debug]
-opencl_trace=true
-device_trace=fine
-device_counters=true
-sc_profile=true
-xrt_trace=true
