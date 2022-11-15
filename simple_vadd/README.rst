@@ -39,11 +39,22 @@ Application code is located in the src directory. Accelerator binary files will 
    
 COMMAND LINE ARGUMENTS
 ----------------------
-
-Once the environment has been configured, the application can be executed by
-
+Configure the enviroment (use your Vitis installation path and version for VITIS_DIR and VITIS_VERSION)
 ::
+   export VITIS_DIR=/tools/Xilinx/Vitis
+   export VITIS_VERSION=2020.2
+   export PLATFORM=xilinx_u280_xdma_201920_3
 
+   source $VITIS_DIR/VITIS_VERSION/settings64.sh
+   source /opt/xilinx/xrt/setup.sh
+
+
+Once the environment has been configured, the application can be compiled by
+::
+   make all TARGET=<sw_emu/hw_emu>
+   
+Once the compilation has been completed, the application can be executed by
+::
    ./vadd1_wrapper <vadd1_kernel XCLBIN>
 
 DETAILS
